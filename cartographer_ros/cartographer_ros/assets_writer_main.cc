@@ -196,6 +196,25 @@ void Run(const string& pose_graph_filename,
         ReadStaticTransformsFromUrdf(urdf_filename, &tf_buffer);
       }
 
+      std::ofstream pose_file("/home/alex/pose_file.txt");     
+
+      if (pose_file.is_open())
+	{
+	  std::setprecision(16);
+	  pose_file << std::fixed;
+	  for (const auto& trajectory:trajectory_proto.node()) {
+	    const auto& timestamp = 
+	      ToRos(carto::common::FromUniversal(trajectory.timestamp())).toSec();
+	    const auto& pose = trajectory.pose();
+	    pose_file << timestamp << " ";
+	    pose_file << pose.translation().x() << " " << pose.translation().y() << " " << pose.translation().z() << " ";
+	    pose_file << pose.rotation().x() << " " << pose.rotation().y() << " " << pose.rotation().z() << " " << pose.rotation().w() << std::endl;
+	  }
+
+	  pose_file.close();
+	  LOG(INFO) << "Poses written to file";
+	}
+
       const carto::transform::TransformInterpolationBuffer
           transform_interpolation_buffer(trajectory_proto);
       rosbag::Bag bag;

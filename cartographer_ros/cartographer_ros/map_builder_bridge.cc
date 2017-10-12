@@ -25,7 +25,7 @@ namespace cartographer_ros {
 namespace {
 
 constexpr double kTrajectoryLineStripMarkerScale = 3.0;
-constexpr double kConstraintMarkerScale = 10.0;
+constexpr double kConstraintMarkerScale = 40.0;
 
 ::std_msgs::ColorRGBA ToMessage(const cartographer::io::FloatColor& color) {
   ::std_msgs::ColorRGBA result;

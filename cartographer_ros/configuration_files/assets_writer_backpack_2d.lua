@@ -17,7 +17,7 @@
 -- cartographer_paper_deutsches_museum.bag requires ~25GiB of memory. You can
 -- reduce this by writing fewer X-Rays or upping VOXEL_SIZE - which is the size
 -- of a pixel in a X-Ray.
-VOXEL_SIZE = 5e-2
+VOXEL_SIZE = 0.4
 
 XY_TRANSFORM =  {
   translation = { 0., 0., 0. },
@@ -40,7 +40,7 @@ options = {
     {
       action = "min_max_range_filter",
       min_range = 1.,
-      max_range = 60.,
+      max_range = 120.,
     },
     {
       action = "dump_num_points",

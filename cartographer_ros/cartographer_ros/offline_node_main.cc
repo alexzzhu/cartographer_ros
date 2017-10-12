@@ -58,6 +58,10 @@ DEFINE_string(pbstream_filename, "",
 DEFINE_bool(keep_running, false,
             "Keep running the offline node after all messages from the bag "
             "have been processed.");
+DEFINE_double(start_time, -1,
+            "Absolute time at which to start the bag. If set to -1, bag will start at the beginning.");
+DEFINE_double(end_time, -1,
+            "Absolute time at which to end the bag. If set to -1, bag will be ended when it's done.");
 
 namespace cartographer_ros {
 namespace {
@@ -146,8 +150,12 @@ void Run(const std::vector<string>& bag_filenames) {
     // because it gets very inefficient with a large one.
     std::deque<rosbag::MessageInstance> delayed_messages;
     for (const rosbag::MessageInstance& msg : view) {
-      if (!::ros::ok()) {
+      if (!::ros::ok() || (FLAGS_end_time != -1 && msg.getTime().toSec() > FLAGS_end_time)) {
         break;
+      }
+
+      if (FLAGS_start_time > msg.getTime().toSec()) {
+	continue;
       }
 
       if (FLAGS_use_bag_transforms && msg.isType<tf2_msgs::TFMessage>()) {

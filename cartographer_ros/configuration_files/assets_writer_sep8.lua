@@ -30,7 +30,7 @@ YZ_TRANSFORM =  {
 }
 
 options = {
-  tracking_frame = "imu_link",
+  tracking_frame = "base_link",
   pipeline = {
     {
       action = "min_max_range_filter",

@@ -42,11 +42,27 @@
     </visual>
   </link>
 
+  <link name="odom">
+    <visual>
+      <origin xyz="0.0 0.0 0.0" />
+      <geometry>
+        <cylinder length="0.07" radius="0.05" />
+      </geometry>
+      <material name="gray" />
+    </visual>
+  </link>
+
   <link name="base_link" />
 
   <joint name="imu_link_joint" type="fixed">
     <parent link="base_link" />
     <child link="imu0" />
+    <origin xyz="0 0 0" rpy="0 0 0"/>
+  </joint>
+
+  <joint name="odom_joint" type="fixed">
+    <parent link="base_link" />
+    <child link="odom" />
     <origin xyz="0 0 0" rpy="0 0 0"/>
   </joint>
 
@@ -56,6 +72,7 @@
     <child link="velodyne" />
     <!--origin xyz="0.0749785784089996 0.0426431639222987 -0.111216781371902" rpy="-1.9253901643426763 -1.5296239544924022 -1.234209532506278" /-->
     <origin xyz="-0.013293635902201 0.120644871567151 -0.144984586373124" rpy="-2.23322380578611 -1.52930794574523 0.635610556974953" />
+    <!--origin xyz="0 0 0" rpy="0 0 0" /-->
   </joint>
 
 </robot>
