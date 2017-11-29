@@ -23,13 +23,13 @@
   <node name="cartographer_offline_node" pkg="cartographer_ros"
       type="cartographer_offline_node" args="
           -configuration_directory $(find cartographer_ros)/configuration_files
-          -configuration_basename sep8.lua
+          -configuration_basename sep8_2d.lua
           -urdf_filename $(find cartographer_ros)/urdf/sep8.urdf
           -bag_filenames $(arg bag_filenames)"
       output="screen">
     <remap from="points2" to="/velodyne_point_cloud" />
     <remap from="imu" to="/imu0"/>
-    <remap from="odom" to="/odom"/>
+    <!--remap from="odom" to="/odometry/filtered"/-->
   </node>
 
 <!-- 1506120202.066393346" 	  
